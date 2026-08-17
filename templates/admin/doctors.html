@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctors - MediCare Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #f0f4f8;
+       /* background-image: url('../assets/images/dashboard-bg.jpg'); */
+    }
+
+    /* Sidebar */
+    aside {
+      width: 220px;
+      background: #0d6efd;
+      color: #fff;
+      padding: 20px;
+    }
+    aside .logo {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+    aside .logo span {
+      color: #ffd700;
+    }
+    aside nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 15px 0;
+      padding: 10px 12px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    aside nav a:hover,
+    aside nav a.active {
+      background: #ffffff;
+      color: #0d6efd;
+      font-weight: bold;
+    }
+
+    /* Main Layout */
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar h1 {
+      font-size: 28px;
+      color: #333;
+    }
+    .topbar .topbar-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .topbar button,
+    .logout-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    #toggleForm {
+      background-color: #0d6efd;
+    }
+    .logout-btn {
+      background-color: #dc3545;
+    }
+    .logout-btn:hover {
+      background-color: #bb2d3b;
+    }
+
+    /* Form Container */
+    .form-container {
+      margin-top: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      display: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .form-container .actions {
+      display: flex;
+      gap: 10px;
+    }
+    .form-container .actions button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .form-container .save-btn {
+      background: #198754;
+      color: white;
+    }
+    .form-container .cancel-btn {
+      background: #6c757d;
+      color: white;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #f1f3f5;
+    }
+    td img {
+      width: 40px;
+      border-radius: 50%;
+    }
+    td button {
+      margin-right: 6px;
+      padding: 4px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background: #0d6efd;
+      color: white;
+    }
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside>
+    <div class="logo">Medi<span>Care</span></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="doctors.html" class="active">Doctors</a>
+      <a href="patients.html">Patients</a>
+      <a href="appointments.html">Appointments</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="../index.html">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="topbar">
+      <h1>Doctors Management 👨‍⚕️</h1>
+      <div class="topbar-buttons">
+        <button id="toggleForm">+ Add Doctor</button>
+        <a href="../index.html" class="logout-btn">Logout</a>
+      </div>
+    </div>
+
+    <!-- Add/Edit Form -->
+    <div class="form-container" id="doctorFormContainer">
+      <form id="doctorForm">
+        <input type="hidden" id="doctorId">
+        <label>Name: <input type="text" id="doctorName" required></label>
+        <label>Specialization: <input type="text" id="doctorSpec" required></label>
+        <label>Phone: <input type="text" id="doctorPhone" required></label>
+        <label>Location: <input type="text" id="doctorLoc" required></label>
+        <label>Photo URL: <input type="text" id="doctorPhoto" required></label>
+        <div class="actions">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" class="cancel-btn" onclick="resetForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Doctors Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Specialization</th>
+          <th>Phone</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="doctorTableBody">
+        <tr>
+          <td>DR001</td>
+          <td><img src="../assets/images/doctor1.jpg" alt="Dr. Kavitha"></td>
+          <td>Dr. Kavitha Raj</td>
+          <td>Cardiologist</td>
+          <td>+91 9876543210</td>
+          <td>Chennai</td>
+          <td>
+            <button class="edit-btn" onclick="editDoctor(this)">Edit</button>
+            <button class="delete-btn" onclick="deleteDoctor(this)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer>
+      &copy; 2025 MediCare Admin Panel. All rights reserved.
+    </footer>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const formContainer = document.getElementById("doctorFormContainer");
+    const toggleFormBtn = document.getElementById("toggleForm");
+    const doctorForm = document.getElementById("doctorForm");
+    const tableBody = document.getElementById("doctorTableBody");
+
+    let isEditMode = false;
+    let currentRow = null;
+
+    toggleFormBtn.addEventListener("click", () => {
+      formContainer.style.display = formContainer.style.display === "none" || formContainer.style.display === "" ? "block" : "none";
+      resetForm();
+    });
+
+    function resetForm() {
+      doctorForm.reset();
+      isEditMode = false;
+      currentRow = null;
+    }
+
+    doctorForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("doctorName").value;
+      const spec = document.getElementById("doctorSpec").value;
+      const phone = document.getElementById("doctorPhone").value;
+      const loc = document.getElementById("doctorLoc").value;
+      const photo = document.getElementById("doctorPhoto").value;
+
+      if (isEditMode && currentRow) {
+        const cells = currentRow.querySelectorAll("td");
+        cells[1].innerHTML = `<img src="${photo}">`;
+        cells[2].innerText = name;
+        cells[3].innerText = spec;
+        cells[4].innerText = phone;
+        cells[5].innerText = loc;
+      } else {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td>DR${Math.floor(Math.random() * 1000)}</td>
+          <td><img src="${photo}"></td>
+          <td>${name}</td>
+          <td>${spec}</td>
+          <td>${phone}</td>
+          <td>${loc}</td>
+          <td>
+            <button class="edit-btn" onclick="editDoctor(this)">Edit</button>
+            <button class="delete-btn" onclick="deleteDoctor(this)">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(newRow);
+      }
+      formContainer.style.display = "none";
+      resetForm();
+    });
+
+    function editDoctor(button) {
+      currentRow = button.closest("tr");
+      const cells = currentRow.querySelectorAll("td");
+      document.getElementById("doctorPhoto").value = cells[1].querySelector("img").src;
+      document.getElementById("doctorName").value = cells[2].innerText;
+      document.getElementById("doctorSpec").value = cells[3].innerText;
+      document.getElementById("doctorPhone").value = cells[4].innerText;
+      document.getElementById("doctorLoc").value = cells[5].innerText;
+      isEditMode = true;
+      formContainer.style.display = "block";
+    }
+
+    function deleteDoctor(button) {
+      const confirmDel = confirm("Are you sure to delete this doctor?");
+      if (confirmDel) {
+        const row = button.closest("tr");
+        row.remove();
+      }
+    }
+  </script>
+</body>
+</html>

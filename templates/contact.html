@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - MediCare</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <style>
+      :root {
+        --primary: #4a00e0;
+        --secondary: #00d2ff;
+        --dark: #111;
+        --light: #f0f0f0;
+        --white: #fff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #00d2ff, #4a00e0);
+        color: var(--white);
+        overflow-x: hidden;
+      }
+      header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--white);
+      }
+      nav a,
+      .nav-btn {
+        margin-left: 1rem;
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #ffd700;
+      }
+      .nav-btn {
+        background: #fff;
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .nav-btn:hover {
+        background: #ffd700;
+        color: var(--dark);
+      }
+
+      .contact-section {
+        padding: 4rem 2rem;
+        max-width: 600px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        margin-top: 5rem;
+      }
+      .contact-section h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        color: #ffd700;
+      }
+      .contact-section form label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        font-weight: 500;
+      }
+      .contact-section form input,
+      .contact-section form textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+      .contact-section form textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+      .contact-section form button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #ffd700;
+        color: #111;
+        border: none;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .contact-section form button:hover {
+        background-color: #fff200;
+      }
+
+      footer {
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.4);
+        text-align: center;
+        font-size: 0.9rem;
+        color: #ccc;
+        margin-top: 3rem;
+      }
+
+      /* Modal Styles */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .modal.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-content {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 2rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+      .modal-content label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        font-weight: 500;
+      }
+      .modal-content input,
+      .modal-content select {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 1rem;
+      }
+      .modal-content button {
+        width: 100%;
+        padding: 0.7rem;
+        border: none;
+        background: #ffd700;
+        color: #000;
+        border-radius: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .contact-section {
+          margin: 2rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">MediCare</div>
+      <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        <button class="nav-btn" id="loginBtn">Login</button>
+      </nav>
+    </header>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section">
+      <h2>Contact Us</h2>
+      <form>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="Enter subject" required />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          placeholder="Type your message..."
+          required
+        ></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <footer>&copy; 2025 MediCare. Designed for modern healthcare.</footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h2 style="text-align: center">Login</h2>
+        <form id="loginForm">
+          <label for="userType">User Role</label>
+          <select id="userType" required>
+            <option value="">Select</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
+          <label>Email</label>
+          <input type="email" required />
+          <label>Password</label>
+          <input type="password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS Script -->
+    <script>
+      const loginBtn = document.getElementById("loginBtn");
+      const modal = document.getElementById("loginModal");
+      const closeBtn = document.getElementById("closeModal");
+
+      loginBtn.onclick = () => modal.classList.add("show");
+      closeBtn.onclick = () => modal.classList.remove("show");
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const role = document.getElementById("userType").value;
+          if (role === "admin") window.location.href = "/admin/";
+          else if (role === "doctor")
+            window.location.href = "/doctors/dashboard/";
+          else if (role === "patient")
+            window.location.href = "/patients/dashboard/";
+          else alert("Please select a role.");
+        });
+    </script>
+  </body>
+</html>

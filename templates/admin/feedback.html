@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Feedback</title>
+    <link rel="stylesheet" href="../assets/css/admin-appointments.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f5f7fa;
+        min-height: 100vh;
+        position: relative; /* IMPORTANT for absolute logout positioning */
+      }
+
+      /* Sidebar */
+      .admin-sidebar {
+        width: 220px;
+        background-color: #007bff;
+        color: white;
+        padding: 30px 20px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .admin-sidebar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 30px;
+      }
+
+      .admin-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .admin-nav a {
+        text-decoration: none;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+      }
+
+      .admin-nav a:hover {
+        background-color: #3399ff;
+      }
+
+      .admin-nav a.active {
+        background-color: #0056b3;
+      }
+
+      /* Main Content */
+      .admin-main-content {
+        margin-left: 220px;
+        padding: 30px;
+        width: calc(100% - 220px);
+      }
+
+      /* Logout Button - Top Right Corner */
+      .logout-btn-wrapper {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+
+      .logout-btn {
+        background-color: #dc3545;
+        color: white;
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+
+      .logout-btn:hover {
+        background-color: #c82333;
+      }
+
+      /* Header layout */
+      .admin-header {
+        margin-bottom: 25px;
+      }
+
+      .admin-header h1 {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      /* Table */
+      .appointments-table-section {
+        overflow-x: auto;
+      }
+
+      .appointments-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        margin-top: 20px;
+      }
+
+      .appointments-table th,
+      .appointments-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+      }
+
+      .appointments-table th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .appointments-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      @media (max-width: 768px) {
+        .admin-sidebar {
+          position: relative;
+          width: 100%;
+          height: auto;
+        }
+
+        .admin-main-content {
+          margin-left: 0;
+          padding: 20px;
+          width: 100%;
+        }
+
+        .logout-btn-wrapper {
+          position: static;
+          text-align: right;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logout Button -->
+    <div class="logout-btn-wrapper">
+      <a href="../index.html" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="logo">MediCare Admin</div>
+      <nav class="admin-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="patients.html">Patients</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="feedback.html" class="active">Feedback</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-header">
+        <h1>Patient Feedback</h1>
+      </header>
+
+      <section class="appointments-table-section">
+        <table class="appointments-table">
+          <thead>
+            <tr>
+              <th>Feedback ID</th>
+              <th>Patient Name</th>
+              <th>Doctor</th>
+              <th>Rating</th>
+              <th>Comments</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#FB001</td>
+              <td>John Doe</td>
+              <td>Dr. Anita Sharma</td>
+              <td>4.5</td>
+              <td>Excellent service and care!</td>
+              <td>2025-06-12</td>
+            </tr>
+            <tr>
+              <td>#FB002</td>
+              <td>Priya Kumar</td>
+              <td>Dr. Arvind Menon</td>
+              <td>3.8</td>
+              <td>Good but waiting time was long.</td>
+              <td>2025-06-10</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

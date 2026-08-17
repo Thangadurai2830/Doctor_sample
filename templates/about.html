@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About – MediCare</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <style>
+      :root {
+        --primary: #4a00e0;
+        --secondary: #00d2ff;
+        --dark: #111;
+        --light: #f0f0f0;
+        --white: #fff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #00d2ff, #4a00e0);
+        color: var(--white);
+        overflow-x: hidden;
+      }
+      header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--white);
+      }
+      nav a,
+      .nav-btn {
+        margin-left: 1rem;
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #ffd700;
+      }
+      .nav-btn {
+        background: #fff;
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .nav-btn:hover {
+        background: #ffd700;
+        color: var(--dark);
+      }
+
+      .section {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(6px);
+      }
+      .section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: #ffd700;
+      }
+      .section p {
+        font-size: 1.1rem;
+        color: #eee;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      .section .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+      .card h3 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+      }
+      .card p {
+        font-size: 1rem;
+        color: #eee;
+      }
+
+      footer {
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.4);
+        text-align: center;
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .modal.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-content {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 2rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+      .modal-content label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        font-weight: 500;
+      }
+      .modal-content input,
+      .modal-content select {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 1rem;
+      }
+      .modal-content button {
+        width: 100%;
+        padding: 0.7rem;
+        border: none;
+        background: #ffd700;
+        color: #000;
+        border-radius: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .section h2 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <div class="logo">MediCare</div>
+      <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        <button class="nav-btn" id="loginBtn">Login</button>
+      </nav>
+    </header>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <h2>About MediCare</h2>
+      <p>
+        MediCare is your trusted healthcare partner, simplifying the doctor
+        appointment process. We connect patients with verified, highly qualified
+        doctors across multiple specialties. Our platform ensures convenience,
+        trust, and speed by enabling patients to book appointments with ease
+        from their smartphones or computers. MediCare is committed to
+        transforming the digital healthcare experience with advanced technology
+        and patient-first policies.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Our Mission</h3>
+          <p>
+            To make quality healthcare accessible and convenient for everyone by
+            providing digital-first medical appointment services.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Our Vision</h3>
+          <p>
+            To become the leading platform for online doctor consultation and
+            hospital services, empowering patients through technology.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Why Choose Us?</h3>
+          <p>
+            24/7 access, verified doctors, instant notifications, and a
+            user-friendly interface ensure a hassle-free experience.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>&copy; 2025 MediCare. Designed for modern healthcare.</footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h2 style="text-align: center">Login</h2>
+        <form id="loginForm">
+          <label for="userType">User Role</label>
+          <select id="userType" required>
+            <option value="">Select</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
+          <label>Email</label>
+          <input type="email" required />
+          <label>Password</label>
+          <input type="password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS Script -->
+    <script>
+      const loginBtn = document.getElementById("loginBtn");
+      const modal = document.getElementById("loginModal");
+      const closeBtn = document.getElementById("closeModal");
+
+      loginBtn.onclick = () => modal.classList.add("show");
+      closeBtn.onclick = () => modal.classList.remove("show");
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const role = document.getElementById("userType").value;
+          if (role === "admin") window.location.href = "/admin/";
+          else if (role === "doctor")
+            window.location.href = "/doctors/dashboard/";
+          else if (role === "patient")
+            window.location.href = "/patients/dashboard/";
+          else alert("Please select a role.");
+        });
+    </script>
+  </body>
+</html>

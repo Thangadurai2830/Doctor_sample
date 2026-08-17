@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard - MediCare</title>
+  <link rel="stylesheet" href="../assets/css/doctor-dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    /* Header */
+    .doc-dash-header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+      color: white;
+    }
+
+    .doc-dash-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .doc-dash-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .doc-dash-logo span {
+      color: #ffde59;
+    }
+
+    .doc-dash-nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .doc-dash-nav a.active {
+      background-color: #023e8a;
+    }
+
+    .doc-dash-nav a:nth-child(1):hover {
+      background-color: #0077b6;
+      transform: scale(1.05);
+    }
+
+    .doc-dash-nav a:nth-child(2):hover {
+      background-color: #00b4d8;
+      transform: scale(1.05);
+    }
+
+    .doc-dash-nav a:nth-child(3):hover {
+      background-color: #90e0ef;
+      color: #023e8a;
+      transform: scale(1.05);
+    }
+
+    .doc-dash-nav a:nth-child(4):hover {
+      background-color: #ff6b6b;
+      transform: scale(1.05);
+    }
+
+    /* Main Section */
+    .doc-dash-main {
+      padding: 2rem;
+    }
+
+    .doc-dash-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .doc-dash-heading {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #0077b6;
+    }
+
+    .doc-dash-subtitle {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .doc-dash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .doc-dash-card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .doc-dash-card h2 {
+      font-size: 2rem;
+      color: #0077b6;
+    }
+
+    .doc-dash-card p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Action Buttons */
+    .doc-dash-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .doc-dash-action-btn {
+      background-color: #0077b6;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .doc-dash-action-btn:hover {
+      background-color: #023e8a;
+    }
+
+    /* Footer */
+    .doc-dash-footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #eaf4fb;
+      color: #555;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .doc-dash-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .doc-dash-nav {
+        margin-top: 1rem;
+      }
+
+      .doc-dash-nav a {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="doc-dash-header">
+    <div class="doc-dash-container">
+      <div class="doc-dash-logo">Medi<span>Care</span> | Doctor</div>
+      <nav class="doc-dash-nav">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="profile.html">Profile</a>
+        <a href="../index.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Dashboard Main -->
+  <main class="doc-dash-main">
+    <div class="doc-dash-wrapper">
+      <h1 class="doc-dash-heading">👨‍⚕️ Welcome, Dr. Kumar!</h1>
+      <p class="doc-dash-subtitle">Here is a quick overview of your activities today.</p>
+
+      <!-- Dashboard Cards -->
+      <div class="doc-dash-grid">
+        <div class="doc-dash-card">
+          <h2>5</h2>
+          <p>Appointments Today</p>
+        </div>
+        <div class="doc-dash-card">
+          <h2>12</h2>
+          <p>Total Patients</p>
+        </div>
+        <div class="doc-dash-card">
+          <h2>3</h2>
+          <p>Treatments Added</p>
+        </div>
+        <div class="doc-dash-card">
+          <h2>4.9⭐</h2>
+          <p>Average Rating</p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="doc-dash-actions">
+        <a href="appointments.html" class="doc-dash-action-btn">View Appointments</a>
+        <a href="profile.html" class="doc-dash-action-btn">Update Profile</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="doc-dash-footer">
+    &copy; 2025 MediCare. All rights reserved.
+  </footer>
+
+</body>
+</html>

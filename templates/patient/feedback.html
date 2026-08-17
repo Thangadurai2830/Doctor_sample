@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Feedback - MediCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo span {
+      color: #ffde59;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    nav a.active {
+      background-color: #032E8A;
+    }
+
+    nav a:hover:not(.active) {
+      background-color: #00b4d8;
+      transform: scale(1.05);
+    }
+
+    nav a.logout:hover {
+      background-color: #e63946;
+      color: white;
+    }
+
+    .feedback-section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: #0077b6;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f9fbfd;
+    }
+
+    .submit-btn {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: #005f8f;
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e7f1f9;
+      margin-top: 2rem;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">Medi<span>Care</span> | Patient</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="book_appointment.html">Book Appointment</a>
+        <a href="my-appointment.html">My Appointments</a>
+        <a href="profile.html">Profile</a>
+        <a href="feedback.html" class="active">Feedback</a>
+        <a href="../index.html" class="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Feedback Section -->
+  <section class="feedback-section">
+    <h2>📝 Submit Feedback</h2>
+    <form id="feedbackForm">
+      <div>
+        <label for="rating">How would you rate your experience?</label>
+        <select id="rating" name="rating" required>
+          <option value="">-- Select Rating --</option>
+          <option value="5">Excellent 🌟🌟🌟🌟🌟</option>
+          <option value="4">Very Good 🌟🌟🌟🌟</option>
+          <option value="3">Good 🌟🌟🌟</option>
+          <option value="2">Fair 🌟🌟</option>
+          <option value="1">Poor 🌟</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="comments">Additional Comments</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Write your feedback here..."></textarea>
+      </div>
+
+      <div style="text-align: center;">
+        <button type="submit" class="submit-btn">Submit Feedback</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 MediCare. All rights reserved.
+  </footer>
+
+  <!-- JS -->
+  <script>
+    document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("✅ Thank you for your feedback!");
+      document.getElementById("feedbackForm").reset();
+    });
+  </script>
+
+</body>
+</html>

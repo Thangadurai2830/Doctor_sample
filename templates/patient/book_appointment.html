@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Appointment - MediCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f8fc;
+      color: #222;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    .book-header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .book-wrapper {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .book-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .book-logo span {
+      color: #ffde59;
+    }
+
+    .book-nav {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .book-nav a {
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .book-nav a:hover:not(.book-logout):not(.active) {
+      background-color: #00b4d8;
+      transform: scale(1.05);
+    }
+
+    .book-nav a.active {
+      background-color: #023e8a;
+      font-weight: 400;
+      transform: scale(1.05);
+    }
+
+    .book-nav .book-logout:hover {
+      background-color: #e63946;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Appointment Section */
+    .appointment-area {
+      padding: 2rem;
+    }
+
+    .appointment-container {
+      max-width: 700px;
+      background-color: #ffffff;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .appointment-title {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #0077b6;
+      margin-bottom: 1.5rem;
+    }
+
+    .appointment-form .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group select,
+    .form-group input[type="date"] {
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #f8fbff;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group select:focus,
+    .form-group input[type="date"]:focus {
+      border-color: #0077b6;
+      outline: none;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #0077b6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #0096c7;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .book-footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background-color: #e7f1f9;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .book-nav {
+        justify-content: center;
+      }
+
+      .book-header {
+        text-align: center;
+      }
+
+      .book-logo {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="book-header">
+    <div class="book-wrapper">
+      <div class="book-logo">Medi<span>Care</span> | Patient</div>
+      <nav class="book-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="book_appointment.html" class="active">Book Appointments</a>
+        <a href="my-appointment.html">My Appointments</a>
+        <a href="profile.html">Profile</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="../logout.html" class="book-logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Appointment Booking Form -->
+  <section class="appointment-area">
+    <div class="appointment-container">
+      <h2 class="appointment-title">Book a New Appointment</h2>
+      <form class="appointment-form" action="#" method="POST">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="doctor">Select Doctor</label>
+            <select id="doctor" name="doctor" required>
+              <option value="">-- Choose Doctor --</option>
+              <option value="dr-ravi">Dr. Ravi Kumar - Cardiologist</option>
+              <option value="dr-mehra">Dr. Aisha Mehra - Pediatrician</option>
+              <option value="dr-naveen">Dr. Naveen Das - Neurologist</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Select Date</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="slot">Select Time Slot</label>
+            <select id="slot" name="slot" required>
+              <option value="">-- Choose Slot --</option>
+              <option value="9-10">9:00 AM – 10:00 AM</option>
+              <option value="11-12">11:00 AM – 12:00 PM</option>
+              <option value="2-3">2:00 PM – 3:00 PM</option>
+              <option value="4-5">4:00 PM – 5:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">Confirm Appointment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="book-footer">
+    <p>&copy; 2025 MediCare. Booking made easy.</p>
+  </footer>
+
+</body>
+</html>

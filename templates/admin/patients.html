@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Management - Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f9f9f9;
+      
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #007bff;
+      padding: 30px 20px;
+      position: fixed;
+      height: 100vh;
+      color: white;
+    }
+
+    .sidebar h1 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sidebar nav a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #3399ff;
+      transform: translateX(5px);
+    }
+
+    .sidebar nav a.active {
+      background-color: #0056b3;
+    }
+
+    /* Logout button at top-right */
+    .topbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+    }
+
+    .topbar a.logout-btn {
+      background-color: #dc3545;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .topbar a.logout-btn:hover {
+      background-color: #c82333;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 220px;
+      padding: 40px;
+      width: 100%;
+    }
+
+    .main-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .admin-patient-search input {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .admin-patient-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .admin-patient-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+
+    .admin-patient-table th,
+    .admin-patient-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .admin-patient-table th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .admin-patient-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .admin-patient-table button {
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .admin-patient-table button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .modal-content h3 {
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      margin: 5px 0;
+    }
+
+    .modal-close-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .topbar {
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h1>MediCare Admin</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="doctors.html">Doctors</a>
+      <a href="patients.html" class="active">Patients</a>
+      <a href="appointments.html">Appointments</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+  </aside>
+
+  <!-- Logout Button Top-Right -->
+  <div class="topbar">
+    <a href="../index.html" class="logout-btn">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <h2>Patient Management</h2>
+
+    <div class="admin-patient-search">
+      <input type="text" id="searchInput" placeholder="Search by name or ID..." />
+    </div>
+
+    <div class="admin-patient-table-wrapper">
+      <table class="admin-patient-table">
+        <thead>
+          <tr>
+            <th>Patient ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Last Visit</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="patientTable">
+          <tr>
+            <td>PT001</td>
+            <td>Ravi Kumar</td>
+            <td>32</td>
+            <td>ravi@example.com</td>
+            <td>2025-06-10</td>
+            <td><button onclick="viewPatient(this)">View</button></td>
+          </tr>
+          <tr>
+            <td>PT002</td>
+            <td>Priya Sharma</td>
+            <td>27</td>
+            <td>priya@example.com</td>
+            <td>2025-06-08</td>
+            <td><button onclick="viewPatient(this)">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="viewModal">
+    <div class="modal-content">
+      <h3>Patient Details</h3>
+      <p><strong>ID:</strong> <span id="viewID"></span></p>
+      <p><strong>Name:</strong> <span id="viewName"></span></p>
+      <p><strong>Age:</strong> <span id="viewAge"></span></p>
+      <p><strong>Email:</strong> <span id="viewEmail"></span></p>
+      <p><strong>Last Visit:</strong> <span id="viewVisit"></span></p>
+      <button class="modal-close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function () {
+      const filter = searchInput.value.toLowerCase();
+      const rows = document.querySelectorAll("#patientTable tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+      });
+    });
+
+    function viewPatient(button) {
+      const row = button.closest("tr");
+      const cells = row.querySelectorAll("td");
+      document.getElementById("viewID").textContent = cells[0].textContent;
+      document.getElementById("viewName").textContent = cells[1].textContent;
+      document.getElementById("viewAge").textContent = cells[2].textContent;
+      document.getElementById("viewEmail").textContent = cells[3].textContent;
+      document.getElementById("viewVisit").textContent = cells[4].textContent;
+      document.getElementById("viewModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("viewModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>

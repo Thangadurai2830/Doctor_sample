@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Dashboard - MediCare</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f7fb;
+        color: #222;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* Header */
+      .dash-header {
+        background-color: #0077b6;
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .dash-container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .dash-brand {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+
+      .dash-brand span {
+        color: #ffde59;
+      }
+
+      .dash-nav {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .dash-nav a {
+        color: #ffffff;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .dash-nav a.active {
+        background-color: #023e8a;
+      }
+
+      .dash-nav a:hover:not(.logout-btn):not(.active) {
+        background-color: #00b4d8;
+        transform: scale(1.05);
+      }
+
+      .dash-nav .logout-btn:hover {
+        background-color: #e63946;
+        color: white;
+        transform: scale(1.05);
+      }
+
+      /* Dashboard Main */
+      .dash-main {
+        padding: 2rem;
+      }
+
+      .dash-wrapper {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .dash-heading {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #0077b6;
+        text-align: center;
+      }
+
+      .dash-subtext {
+        text-align: center;
+        color: #666;
+        margin-bottom: 2rem;
+      }
+
+      .dash-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .dash-card {
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        border-left: 5px solid #0077b6;
+      }
+
+      .dash-card:hover {
+        background-color: #e0f4ff;
+        transform: translateY(-5px);
+      }
+
+      .dash-card h3 {
+        font-size: 1.2rem;
+        color: #0077b6;
+        margin-bottom: 0.5rem;
+      }
+
+      .dash-card p {
+        color: #555;
+        font-size: 0.95rem;
+      }
+
+      /* Footer */
+      .dash-footer {
+        text-align: center;
+        padding: 1.2rem;
+        background-color: #e7f1f9;
+        color: #555;
+        margin-top: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .dash-nav {
+          justify-content: center;
+        }
+
+        .dash-header {
+          text-align: center;
+        }
+
+        .dash-brand {
+          margin-bottom: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="dash-container">
+        <div class="dash-brand">Medi<span>Care</span> | Patient</div>
+        <nav class="dash-nav">
+          <a href="{% url 'patients:dashboard' %}" class="active">Dashboard</a>
+          <a href="{% url 'booking:book_appointment' %}">Book Appointment</a>
+          <a href="{% url 'patients:appointment_history' %}">My Appointments</a>
+          <a href="{% url 'patients:profile_edit' %}">Profile</a>
+          <a href="#">Feedback</a>
+          <a href="{% url 'index' %}" class="logout-btn">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="dash-main">
+      <div class="dash-wrapper">
+        <h2 class="dash-heading">Welcome Back, Patient 👋</h2>
+        <p class="dash-subtext">Access all your health tools in one place.</p>
+
+        <div class="dash-grid">
+          <a href="{% url 'booking:book_appointment' %}" class="dash-card">
+            <h3>📅 Book Appointment</h3>
+            <p>Schedule a new appointment with available doctors.</p>
+          </a>
+          <a href="{% url 'patients:appointment_history' %}" class="dash-card">
+            <h3>📝 My Appointments</h3>
+            <p>Check upcoming, completed, and cancelled appointments.</p>
+          </a>
+          <a href="{% url 'patients:profile_edit' %}" class="dash-card">
+            <h3>👤 Profile</h3>
+            <p>Update your contact information and password.</p>
+          </a>
+          <a href="#" class="dash-card">
+            <h3>💬 Feedback</h3>
+            <p>Send feedback or suggestions to the admin.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="dash-footer">
+      &copy; 2025 MediCare. Your health, our priority.
+    </footer>
+  </body>
+</html>

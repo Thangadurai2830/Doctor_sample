@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile - MediCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f8fc;
+      color: #222;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    .pr-header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .pr-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pr-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .pr-logo span {
+      color: #ffde59;
+    }
+
+    .pr-nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pr-nav a {
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .pr-nav a:hover:not(.pr-logout),
+    .pr-nav a.active {
+      background-color: #023e8a;
+      transform: scale(1.05);
+    }
+
+    .pr-nav .pr-logout:hover {
+      background-color: #e63946;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Profile Section */
+    .pr-section {
+      padding: 2rem;
+    }
+
+    .pr-wrapper {
+      max-width: 800px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .pr-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #0077b6;
+      margin-bottom: 0.5rem;
+    }
+
+    .pr-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .pr-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .pr-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .pr-group input,
+    .pr-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .pr-group input:focus,
+    .pr-group textarea:focus {
+      border-color: #00b4d8;
+      box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2);
+      outline: none;
+    }
+
+    .pr-save-btn {
+      align-self: flex-end;
+      background-color: #0077b6;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .pr-save-btn:hover {
+      background-color: #005f8c;
+      transform: scale(1.03);
+    }
+
+    /* Footer */
+    .pr-footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background-color: #e7f1f9;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .pr-nav {
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .pr-header {
+        text-align: center;
+      }
+
+      .pr-logo {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="pr-header">
+    <div class="pr-container">
+      <div class="pr-logo">Medi<span>Care</span> | Patient</div>
+      <nav class="pr-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="book_appointment.html">Book</a>
+        <a href="my-appointment.html">Appointments</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="../logout.html" class="pr-logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
+  <section class="pr-section">
+    <div class="pr-wrapper">
+      <h2 class="pr-title">👤 My Profile</h2>
+      <p class="pr-subtitle">Update your personal details and manage your account</p>
+
+      <form action="#" method="POST" class="pr-form">
+        <div class="pr-grid">
+          <div class="pr-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" value="John Doe" required />
+          </div>
+
+          <div class="pr-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="john@example.com" required />
+          </div>
+
+          <div class="pr-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value="+91 9876543210" />
+          </div>
+
+          <div class="pr-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" />
+          </div>
+
+          <div class="pr-group" style="grid-column: span 2;">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3">Chennai, India</textarea>
+          </div>
+
+          <div class="pr-group" style="grid-column: span 2;">
+            <label for="password">Change Password</label>
+            <input type="password" id="password" name="password" placeholder="New password" />
+          </div>
+        </div>
+
+        <button type="submit" class="pr-save-btn">Save Changes</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pr-footer">
+    <p>&copy; 2025 MediCare. Your health, our priority.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Appointments - MediCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f8fc;
+      color: #222;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    .ma-header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .ma-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .ma-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .ma-logo span {
+      color: #ffde59;
+    }
+
+    .ma-nav {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .ma-nav a {
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .ma-nav a:hover:not(.ma-logout),
+    .ma-nav a.active {
+      background-color: #023e8a;
+      transform: scale(1.05);
+    }
+
+    .ma-nav .ma-logout:hover {
+      background-color: #e63946;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Main Section */
+    .ma-section {
+      padding: 2rem;
+    }
+
+    .ma-wrapper {
+      max-width: 1000px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .ma-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #0077b6;
+      margin-bottom: 0.5rem;
+    }
+
+    .ma-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    .ma-table-container {
+      overflow-x: auto;
+    }
+
+    .ma-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .ma-table th,
+    .ma-table td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .ma-table th {
+      background-color: #e0f4ff;
+      color: #0077b6;
+      font-weight: 600;
+    }
+
+    .ma-table tbody tr:hover {
+      background-color: #f1f8fc;
+    }
+
+    .ma-status {
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .confirmed {
+      background-color: #d1f7c4;
+      color: #2a7a00;
+    }
+
+    .pending {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .ma-cancel-btn {
+      padding: 6px 12px;
+      background-color: #e63946;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .ma-cancel-btn:hover {
+      background-color: #c62828;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .ma-footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background-color: #e7f1f9;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .ma-nav {
+        justify-content: center;
+      }
+
+      .ma-header {
+        text-align: center;
+      }
+
+      .ma-logo {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="ma-header">
+    <div class="ma-container">
+      <div class="ma-logo">Medi<span>Care</span> | Patient</div>
+      <nav class="ma-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="book_appointment.html">Book Appointment</a>
+        <a href="my-appointments.html" class="active">My Appointments</a>
+        <a href="profile.html">Profile</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="../logout.html" class="ma-logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Appointments Section -->
+  <section class="ma-section">
+    <div class="ma-wrapper">
+      <h2 class="ma-title">🗓️ My Appointments</h2>
+      <p class="ma-subtitle">Here’s a list of all your booked appointments</p>
+
+      <div class="ma-table-container">
+        <table class="ma-table">
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Speciality</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dr. Ananya Sharma</td>
+              <td>Cardiologist</td>
+              <td>15 June 2025</td>
+              <td>10:30 AM</td>
+              <td><span class="ma-status confirmed">Confirmed</span></td>
+              <td><button class="ma-cancel-btn" data-id="1">Cancel</button></td>
+            </tr>
+            <tr>
+              <td>Dr. Ramesh Patel</td>
+              <td>Dermatologist</td>
+              <td>18 June 2025</td>
+              <td>03:00 PM</td>
+              <td><span class="ma-status pending">Pending</span></td>
+              <td><button class="ma-cancel-btn" data-id="2">Cancel</button></td>
+            </tr>
+            <!-- More rows from backend -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="ma-footer">
+    <p>&copy; 2025 MediCare. Health comes first.</p>
+  </footer>
+
+  <!-- JavaScript: Cancel button functionality -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cancelButtons = document.querySelectorAll(".ma-cancel-btn");
+
+      cancelButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const row = button.closest("tr");
+          const doctor = row.querySelector("td:nth-child(1)").innerText;
+          const date = row.querySelector("td:nth-child(3)").innerText;
+          const appointmentId = button.getAttribute("data-id");
+
+          const confirmCancel = confirm(`Cancel appointment with ${doctor} on ${date}?`);
+
+          if (confirmCancel) {
+            // TODO: Call backend cancel API here with appointmentId
+            // Example:
+            // fetch(`/api/cancel-appointment/${appointmentId}`, { method: 'DELETE' })
+
+            row.remove(); // Remove from table
+            alert("Appointment cancelled.");
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

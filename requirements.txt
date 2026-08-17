@@ -1,0 +1,65 @@
+# Core Django Framework
+Django==4.2.7
+djangorestframework==3.14.0
+
+# Database
+mysqlclient==2.2.0
+PyMySQL==1.1.0
+
+# Forms and Widgets
+django-crispy-forms==2.0
+crispy-bootstrap5==0.7
+
+# Date and Time handling
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Authentication and Security
+django-allauth==0.57.0
+django-cors-headers==4.3.1
+
+# Environment Variables
+python-decouple==3.8
+python-dotenv==1.0.0
+
+# Image Processing (for profile pictures)
+Pillow==10.1.0
+
+# PDF Generation (for appointment receipts)
+reportlab==4.0.7
+weasyprint==60.2
+
+# Email Backend
+django-ses==3.5.2
+
+# Admin Interface Enhancement
+django-admin-interface==0.26.1
+django-colorfield==0.10.1
+
+# Development and Debugging
+django-debug-toolbar==4.2.0
+django-extensions==3.2.3
+
+# Testing
+pytest-django==4.7.0
+factory-boy==3.3.0
+coverage==7.3.2
+
+# Production Server
+gunicorn==21.2.0
+whitenoise==6.6.0
+
+# Caching
+redis==5.0.1
+django-redis==5.4.0
+
+# Logging
+django-logging-json==1.15.0
+
+# API Documentation
+drf-yasg==1.21.7
+
+# Utility
+requests==2.31.0
+celery==5.3.4
+django-celery-beat==2.5.0

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Appointments - MediCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo span {
+      color: #ffde59;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    nav a.active {
+      background-color: #032E8A;
+    }
+
+    nav a:hover:not(.active):not(.logout) {
+      background-color: #00b4d8;
+      transform: scale(1.05);
+    }
+
+    nav a.logout:hover {
+      background-color: #e63946;
+      transform: scale(1.05);
+    }
+
+    .appointments-section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .appointments-section h2 {
+      color: #0077b6;
+      margin-bottom: 0.5rem;
+    }
+
+    .appointments-section p {
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-row input[type="date"] {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .filter-row button {
+      background-color: #0077b6;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .filter-row button:hover {
+      background-color: #005f8f;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #e0f4ff;
+      color: #0077b6;
+      font-weight: 600;
+    }
+
+    .view-btn {
+      background-color: #38b000;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .view-btn:hover {
+      background-color: #2a8900;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e7f1f9;
+      margin-top: 2rem;
+      color: #555;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 450px;
+      width: 90%;
+      text-align: left;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      color: #0077b6;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content p {
+      margin: 0.5rem 0;
+    }
+
+    .close-btn {
+      background-color: #e63946;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-top: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #c12836;
+    }
+
+    @media (max-width: 768px) {
+      .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">Medi<span>Care</span> | Doctor</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="appointments.html" class="active">Appointments</a>
+        <a href="profile.html">Profile</a>
+        <a href="../index.html" class="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <section class="appointments-section">
+    <h2>📅 Scheduled Appointments</h2>
+    <p>Review your upcoming appointments and manage your schedule.</p>
+
+    <!-- Filter -->
+    <div class="filter-row">
+      <label for="filter-date">Filter by Date:</label>
+      <input type="date" id="filter-date" />
+      <button>Search</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Patient ID</th>
+            <th>Patient Name</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Reason</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#PT001</td>
+            <td>John Doe</td>
+            <td>2025-06-15</td>
+            <td>10:00 AM</td>
+            <td>General Checkup</td>
+            <td><button class="view-btn" onclick="showModal('John Doe','2025-06-15','10:00 AM','General Checkup')">View</button></td>
+          </tr>
+          <tr>
+            <td>#PT002</td>
+            <td>Priya Sharma</td>
+            <td>2025-06-16</td>
+            <td>11:30 AM</td>
+            <td>Diabetes Review</td>
+            <td><button class="view-btn" onclick="showModal('Priya Sharma','2025-06-16','11:30 AM','Diabetes Review')">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal Popup -->
+  <div class="modal" id="viewModal">
+    <div class="modal-content">
+      <h3>Appointment Details</h3>
+      <p><strong>Patient Name:</strong> <span id="modalName"></span></p>
+      <p><strong>Date:</strong> <span id="modalDate"></span></p>
+      <p><strong>Time Slot:</strong> <span id="modalTime"></span></p>
+      <p><strong>Reason:</strong> <span id="modalReason"></span></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 MediCare. All rights reserved.
+  </footer>
+
+  <!-- Script -->
+  <script>
+    function showModal(name, date, time, reason) {
+      document.getElementById("modalName").textContent = name;
+      document.getElementById("modalDate").textContent = date;
+      document.getElementById("modalTime").textContent = time;
+      document.getElementById("modalReason").textContent = reason;
+      document.getElementById("viewModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("viewModal").style.display = "none";
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById("viewModal");
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Profile - MediCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f8fc;
+      color: #333;
+    }
+
+    header {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+      color: white;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #ffde59;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      color: white;
+      background-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #00b4d8;
+      transform: scale(1.05);
+    }
+
+    nav a.active {
+      background-color: #023e8a;
+      box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    nav a.logout {
+      background-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav a.logout:hover {
+      background-color: #e63946;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .doc-profile-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #0077b6;
+    }
+
+    .doc-profile-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .doc-profile-form label {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .doc-profile-form input,
+    .doc-profile-form textarea,
+    .doc-profile-form select {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f9fbfd;
+    }
+
+    .doc-profile-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .save-btn {
+      background-color: #0077b6;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .save-btn:hover {
+      background-color: #005f8f;
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background-color: #e7f1f9;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .doc-profile-form {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 1rem;
+      }
+
+      nav a {
+        width: 100%;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <div class="logo">Medi<span>Care</span> | Doctor</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="../index.html" class="logout">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
+  <section class="doc-profile-container">
+    <h2>👨‍⚕️ Doctor Profile</h2>
+    <form id="profileForm" class="doc-profile-form">
+      <div>
+        <label for="doctorName">Full Name</label>
+        <input type="text" id="doctorName" name="doctorName" value="Dr. John Smith" />
+      </div>
+
+      <div>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" value="john.smith@hospital.com" />
+      </div>
+
+      <div>
+        <label for="specialization">Specialization</label>
+        <select id="specialization" name="specialization">
+          <option>Cardiologist</option>
+          <option selected>General Physician</option>
+          <option>Neurologist</option>
+          <option>Orthopedic</option>
+          <option>Pediatrician</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="phone">Contact Number</label>
+        <input type="tel" id="phone" name="phone" value="+91 9876543210" />
+      </div>
+
+      <div class="full-width">
+        <label for="address">Address</label>
+        <textarea id="address" name="address">123, Apollo Towers, Chennai, India</textarea>
+      </div>
+
+      <div class="full-width">
+        <label for="about">About Me</label>
+        <textarea id="about" name="about">Experienced physician with 10+ years in diagnosing and treating patients with a compassionate and patient-centric approach.</textarea>
+      </div>
+
+      <div class="full-width" style="text-align:center; margin-top: 1rem;">
+        <button type="submit" class="save-btn">💾 Save Changes</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 MediCare. All rights reserved.
+  </footer>
+
+  <!-- Script -->
+  <script>
+    document.getElementById("profileForm").addEventListener("submit", function(e) {
+      e.preventDefault(); 
+      alert("✅ Profile updated successfully!");
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>

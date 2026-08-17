@@ -1,0 +1,399 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare – Doctor Booking</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <style>
+      :root {
+        --primary: #4a00e0;
+        --secondary: #00d2ff;
+        --dark: #111;
+        --light: #f0f0f0;
+        --white: #fff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #00d2ff, #4a00e0);
+        color: var(--white);
+        overflow-x: hidden;
+      }
+      header {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--white);
+      }
+      nav a,
+      .nav-btn {
+        margin-left: 1rem;
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #ffd700;
+      }
+      .nav-btn {
+        background: #fff;
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .nav-btn:hover {
+        background: #ffd700;
+        color: var(--dark);
+      }
+
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5rem 2rem 3rem;
+      }
+      .hero-text h1 {
+        font-size: 3rem;
+        background: -webkit-linear-gradient(left, #fff, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-text p {
+        font-size: 1.2rem;
+        margin: 1rem 0 2rem;
+        color: #e0e0e0;
+      }
+      .hero-btn {
+        background: #fff;
+        color: var(--primary);
+        padding: 0.8rem 2rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s ease;
+      }
+      .hero-btn:hover {
+        background: #ffd700;
+        color: var(--dark);
+      }
+
+      .section {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(6px);
+      }
+      .section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+      .card h3 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+      }
+
+      .doctors,
+      .infrastructure {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .doctor-card,
+      .infra-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        border-radius: 16px;
+        text-align: center;
+      }
+      .doctor-card img,
+      .infra-card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+      }
+      .doctor-card h4 {
+        color: #ffd700;
+        margin: 0.5rem 0;
+      }
+
+      .contact {
+        padding: 2rem;
+        text-align: center;
+        font-size: 1.1rem;
+        color: #eee;
+      }
+
+      footer {
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.4);
+        text-align: center;
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      /* Modal Styles */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .modal.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-content {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 2rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+      .modal-content label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        font-weight: 500;
+      }
+      .modal-content input,
+      .modal-content select {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 1rem;
+      }
+      .modal-content button {
+        width: 100%;
+        padding: 0.7rem;
+        border: none;
+        background: #ffd700;
+        color: #000;
+        border-radius: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .hero-text h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">MediCare</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <!-- <a href="./services.html">Services</a> -->
+        <a href="{% url 'contact' %}">Contact</a>
+        <button class="nav-btn" id="loginBtn">Login</button>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1>Book Your Doctor's Appointment</h1>
+        <p>
+          Find the best doctors in your area and book instantly. No queues. No
+          hassle.
+        </p>
+        <a href="{% url 'patients:register' %}" class="hero-btn"
+          >Register Now</a
+        >
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <h2>About MediCare</h2>
+      <p>
+        At MediCare, we aim to connect patients with verified healthcare
+        professionals with ease. Our platform is designed to bring speed,
+        transparency, and reliability to the appointment process. We partner
+        with top hospitals and clinics to ensure high-quality care for all.
+      </p>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+      <h2>Our Services</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>24/7 Booking</h3>
+          <p>Book your doctor anytime from anywhere.</p>
+        </div>
+        <div class="card">
+          <h3>Verified Doctors</h3>
+          <p>Only certified professionals across specialties.</p>
+        </div>
+        <div class="card">
+          <h3>Instant Notifications</h3>
+          <p>Receive real-time updates and appointment reminders.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hospital Infrastructure Section -->
+    <section class="section">
+      <h2>Hospital Infrastructure</h2>
+      <div class="infrastructure">
+        <div class="infra-card">
+          <img src="{% static 'images/infrastructure1.jpg' %}" alt="Infra 1" />
+          <p>Modern Operation Theatres</p>
+        </div>
+        <div class="infra-card">
+          <img src="{% static 'images/infrastructure2.jpg' %}" alt="Infra 2" />
+          <p>Advanced Diagnostic Labs</p>
+        </div>
+        <div class="infra-card">
+          <img src="{% static 'images/infrastructure3.jpg' %}" alt="Infra 3" />
+          <p>Emergency and ICU Facilities</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section class="section">
+      <h2>Meet Our Doctors</h2>
+      <div class="doctors">
+        <div class="doctor-card">
+          <img src="{% static 'images/doctor1.jpg' %}" alt="Dr. Smith" />
+          <h4>Dr. Anjali Sharma</h4>
+          <p>Cardiologist – 10+ years experience</p>
+        </div>
+        <div class="doctor-card">
+          <img src="{% static 'images/doctor2.jpg' %}" alt="Dr. Mehta" />
+          <h4>Dr. Raj Mehta</h4>
+          <p>Neurologist – 12+ years experience</p>
+        </div>
+        <div class="doctor-card">
+          <img src="{% static 'images/doctor3.jpg' %}" alt="Dr. Iqbal" />
+          <h4>Dr. Iqbal Khan</h4>
+          <p>Orthopedic Surgeon – 8+ years experience</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: support@medicare.com | Phone: +91 98765 43210</p>
+    </section>
+
+    <footer>&copy; 2025 MediCare. Designed for modern healthcare.</footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h2 style="text-align: center">Login</h2>
+        <form id="loginForm">
+          <label for="userType">User Role</label>
+          <select id="userType" required>
+            <option value="">Select</option>
+            <option value="admin">Admin</option>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+          </select>
+          <label>Email</label>
+          <input type="email" required />
+          <label>Password</label>
+          <input type="password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS Script -->
+    <script>
+      const loginBtn = document.getElementById("loginBtn");
+      const modal = document.getElementById("loginModal");
+      const closeBtn = document.getElementById("closeModal");
+
+      loginBtn.onclick = () => modal.classList.add("show");
+      closeBtn.onclick = () => modal.classList.remove("show");
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const role = document.getElementById("userType").value;
+          if (role === "admin") window.location.href = "/admin/";
+          else if (role === "doctor")
+            window.location.href = "/doctors/dashboard/";
+          else if (role === "patient")
+            window.location.href = "/patients/dashboard/";
+          else alert("Please select a role.");
+        });
+    </script>
+  </body>
+</html>
